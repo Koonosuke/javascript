@@ -46,6 +46,7 @@
       function main() {
         const host = location.origin.replace(/^http/, 'ws')
         const ws = new WebSocket(host + '/ws')
+        const myId = self.crypto.randomUUID().substr(0, 8)
 
         const form = document.querySelector('.form')
 
@@ -53,7 +54,8 @@
           e.preventDefault()
           const input = document.querySelector('.input')
           const text = input.value
-          ws.send(text)
+          // ws.send(text)
+          ws.send(myId + ':' + text)
           input.value = ''
           input.focus()
         }
